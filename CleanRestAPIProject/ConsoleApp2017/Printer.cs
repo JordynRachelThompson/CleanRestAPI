@@ -72,11 +72,11 @@ namespace ConsoleApp2017
                         _customerService.CreateCustomer(customer);
                         break;
                     case 3:
-                        var idForDelete = PrintFindCustomeryId();
+                        var idForDelete = PrintFindCustomerId();
                         _customerService.DeleteCustomer(idForDelete);
                         break;
                     case 4:
-                        var idForEdit = PrintFindCustomeryId();
+                        var idForEdit = PrintFindCustomerId();
                         var customerToEdit = _customerService.FindCustomerById(idForEdit);
                         Console.WriteLine("Updating " + customerToEdit.FirstName + " " + customerToEdit.LastName);
                         var newFirstName = AskQuestion("Firstname: ");
