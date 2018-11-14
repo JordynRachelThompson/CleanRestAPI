@@ -17,6 +17,7 @@ namespace CustomerApp.Infrastructure.Static.Data.Repositories
             if (FakeDb.Customers.Count >= 1) return;
             var cust1 = new Customer()
             {
+                Id = 1,
                 FirstName = "Jane",
                 LastName = "Doe",
                 Address = "503 SE 34th Terr"
@@ -26,6 +27,7 @@ namespace CustomerApp.Infrastructure.Static.Data.Repositories
 
             var cust2 = new Customer()
             {
+                Id = 2,
                 FirstName = "Jim",
                 LastName = "Doe",
                 Address = "418 Green St"
@@ -50,7 +52,7 @@ namespace CustomerApp.Infrastructure.Static.Data.Repositories
 
         public Customer ReadyById(int id)
         {
-            foreach (var customer in _customers)
+            foreach (var customer in FakeDb.Customers)
             {
                 if (customer.Id == id)
                 {

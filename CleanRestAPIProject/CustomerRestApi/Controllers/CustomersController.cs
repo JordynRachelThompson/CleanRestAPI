@@ -31,9 +31,9 @@ namespace CustomerRestApi.Controllers
 
         // GET api/customers/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<Customer> Get(int id)
         {
-            return "value";
+           return _customerService.FindCustomerById(id);
         }
 
         // POST api/customers
@@ -50,14 +50,24 @@ namespace CustomerRestApi.Controllers
 
         // PUT api/customers/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<Customer> Put(int id, [FromBody] Customer customer)
         {
+            if (id < 1 || id != customer.Id)
+            {
+                return BadRequest("Parameter ID and customer ID must be the same");
+            }
+
+            return Ok(_customerService.UpdateCustomer(customer));
         }
 
         // DELETE api/customers/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Customer> Delete(int id)
         {
+            var customer = _customerService.DeleteCustomer(id);
+            if (customer == null) return StatusCode(404, $"Did not find customer with Id {id}.");
+
+            return Ok($"Customer with Id {id} has been deleted."); 
         }
     }
 }
